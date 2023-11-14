@@ -68,3 +68,10 @@ CREATE TABLE IF NOT EXISTS public.HeroItem
 SELECT class_name
 FROM public.class
 WHERE class_name LIKE '%Archers%'
+
+SELECT c.class_name, AVG(p.player_level) AS average_level
+FROM public.class c
+LEFT JOIN public.hero h ON c.class_id = h.class_id
+LEFT JOIN public.player p ON h.hero_id = p.hero_id
+GROUP BY c.class_name
+ORDER BY average_level DESC;
